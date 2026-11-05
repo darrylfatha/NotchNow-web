@@ -95,7 +95,13 @@ $$('.feature[data-go]').forEach((card) => card.addEventListener('click', () => {
     return;
   }
   setTimeout(() => {
-    showTab(go);
+    if (go === 'lyrics') {
+      showTab('media');
+      showLyrics = true;
+      playing = true;
+      renderLyrics();
+      renderMedia();
+    } else showTab(go);
     holdUntil = Date.now() + 8000;
     setOpen(true);
     scheduleClose(8100);
@@ -145,17 +151,65 @@ function stopRing() {
 $('#a-stop').addEventListener('click', (e) => { e.stopPropagation(); stopRing(); });
 
 // ================= Media (simulasi) =================
+// Lirik contoh di bawah ini ditulis khusus untuk demo (bukan lirik lagu sungguhan).
 const SONGS = [
-  { title: 'Senja di Kota', artist: 'Band Demo', dur: 204, art: 'linear-gradient(135deg,#ff7a59,#b33cff 55%,#3a4bff)' },
-  { title: 'Hujan Pertama', artist: 'Kilau Biru', dur: 187, art: 'linear-gradient(135deg,#30d158,#0a84ff)' },
-  { title: 'Jalan Pulang', artist: 'Orkes Malam', dur: 231, art: 'linear-gradient(135deg,#ffd60a,#ff375f)' },
+  { title: 'Senja di Kota', artist: 'Band Demo', dur: 204, art: 'linear-gradient(135deg,#ff7a59,#b33cff 55%,#3a4bff)',
+    lyrics: ['Lampu kota mulai menyala', 'Langkahku pelan di trotoar', 'Senja jingga menyapa kita', 'Di antara riuh yang samar',
+      'Biar waktu terus berjalan', 'Aku tetap di sini menunggu', 'Senja di kota, peluk aku', 'Sebelum malam datang merayu', '♪'] },
+  { title: 'Hujan Pertama', artist: 'Kilau Biru', dur: 187, art: 'linear-gradient(135deg,#30d158,#0a84ff)',
+    lyrics: ['Rintik pertama jatuh di jendela', 'Aroma tanah memanggil namamu', 'Kubiarkan basah menyentuh kepala', 'Seperti dulu saat kau di situ',
+      'Hujan pertama, jangan cepat reda', 'Biar kuingat semua yang tersisa', '♪'] },
+  { title: 'Jalan Pulang', artist: 'Orkes Malam', dur: 231, art: 'linear-gradient(135deg,#ffd60a,#ff375f)',
+    lyrics: ['Jalan pulang terasa panjang', 'Lampu-lampu berbaris tenang', 'Kuhitung bintang satu per satu', 'Sambil bersenandung lagu lamamu',
+      'Bawa aku pulang, pulang', 'Ke tempat hatiku tenang', '♪'] },
 ];
+// Beri penanda waktu: baris pertama di detik ke-4, lalu tiap 4,5 detik, berulang sampai lagu selesai.
+SONGS.forEach((s) => {
+  s.lines = [];
+  for (let t = 4, i = 0; t < s.dur - 3; t += 4.5, i++) s.lines.push({ t, text: s.lyrics[i % s.lyrics.length] });
+});
+let showLyrics = false;
+let lyIdx = -2;
+function renderLyrics() {
+  $('.m-grid').classList.toggle('lyrics', showLyrics);
+  $('#ly-btn').classList.toggle('active', showLyrics);
+  $('#ly-track').innerHTML = SONGS[song].lines.map((l) => `<div class="ly-line">${esc(l.text)}</div>`).join('');
+  $('#ly-track').style.transform = '';
+  lyIdx = -2;
+  updateLyrics();
+}
+function currentLine() {
+  const lines = SONGS[song].lines;
+  let idx = -1;
+  for (let i = 0; i < lines.length && lines[i].t <= pos; i++) idx = i;
+  return idx;
+}
+function updateLyrics() {
+  const idx = currentLine();
+  if (idx === lyIdx) return;
+  lyIdx = idx;
+  const els = $$('#ly-track .ly-line');
+  els.forEach((el, i) => { el.classList.toggle('active', i === idx); el.classList.toggle('past', i < idx); });
+  const box = $('#m-lyrics');
+  const el = els[Math.max(0, idx)];
+  if (el) $('#ly-track').style.transform = `translateY(${-(el.offsetTop - box.clientHeight / 2 + el.offsetHeight / 2)}px)`;
+}
+$('#ly-btn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  showLyrics = !showLyrics;
+  if (showLyrics && !playing) playing = true;
+  renderLyrics();
+  renderMedia();
+});
 let song = 0;
 let pos = 0;
 let playing = false;
 let vol = 40;
 function renderMedia() {
   const s = SONGS[song];
+  if ($('#ly-track').dataset.song !== String(song)) { $('#ly-track').dataset.song = String(song); renderLyrics(); }
+  updateLyrics();
+  $('#mini-art').style.background = s.art;
   $('#m-title').textContent = s.title;
   $('#m-artist').textContent = s.artist;
   $('#m-art').style.background = s.art;
@@ -412,11 +466,18 @@ function tick() {
   // isi tampilan mini
   let html = '';
   let wide = false;
+  let lyric = false;
+  const li = playing ? currentLine() : -1;
+  const lineText = li >= 0 ? SONGS[song].lines[li].text : '';
   if (tEnd) { html = `<span class="mini-timer">⏱ ${clock(tLeft())}</span>`; wide = true; }
-  else if (playing) { html = `<span class="mini-song">${esc(SONGS[song].title)}</span><span class="eq"><i></i><i></i><i></i><i></i></span>`; wide = true; }
+  else if (playing && lineText && lineText !== '♪') {
+    html = `<span class="mini-lyric">${esc(lineText)}</span><span class="eq"><i></i><i></i><i></i><i></i></span>`; wide = true; lyric = true;
+  } else if (playing) { html = `<span class="mini-song">${esc(SONGS[song].title)}</span><span class="eq"><i></i><i></i><i></i><i></i></span>`; wide = true; }
   else html = `☾ ${nx.label} ${times[nx.k]}`;
   if (html !== lastMini) { $('#mini-right').innerHTML = html; lastMini = html; }
   notch.classList.toggle('wide', wide);
+  notch.classList.toggle('lyric', lyric);
+  notch.classList.toggle('playing', playing && !tEnd);
   $('#brand-dot').className = tEnd ? 'timer' : playing ? 'music' : '';
 }
 tick();

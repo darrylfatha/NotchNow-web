@@ -29,9 +29,9 @@
 
 <header class="hero" id="top">
   <div class="hero-text">
-    <span class="eyebrow">Gratis · Windows 10 & 11</span>
+    <span class="eyebrow">Baru di v1.1: lirik tersinkron 🎤</span>
     <h1>Notch ala MacBook,<br><span class="grad">kini di Windows.</span></h1>
-    <p class="lead">Kontrol musik, to-do, kalender, timer, alarm, dan jadwal sholat sesuai lokasi. Semuanya ada di notch kecil di atas layar, tinggal arahkan kursor.</p>
+    <p class="lead">Kontrol musik dengan lirik tersinkron, to-do, kalender, timer, alarm, dan jadwal sholat sesuai lokasi. Semuanya ada di notch kecil di atas layar, tinggal arahkan kursor.</p>
     <div class="cta">
       <a class="btn btn-big download-link" href="#" data-download>
         <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
@@ -64,7 +64,7 @@
             <div class="ear left"></div><div class="ear right"></div>
             <div class="shell">
               <div class="mini">
-                <span id="mini-time">--:--</span>
+                <span class="mini-left"><i class="mini-art" id="mini-art"></i><span id="mini-time">--:--</span></span>
                 <span id="mini-right"></span>
               </div>
               <div class="brand"><i id="brand-dot"></i>NotchNow</div>
@@ -89,12 +89,15 @@
                         <div class="m-app">Spotify · <span id="m-state">dijeda</span></div>
                         <div class="m-title" id="m-title">Senja di Kota</div>
                         <div class="m-artist" id="m-artist">Band Demo</div>
+                        <div class="m-lyrics" id="m-lyrics"><div id="ly-track"></div></div>
                         <div class="m-prog"><span id="m-pos">0:00</span><div class="m-bar"><i id="m-bar"></i></div><span id="m-dur">3:24</span></div>
                         <div class="m-ctrl">
                           <button data-m="prev" aria-label="Sebelumnya">⏮</button>
                           <button data-m="stop" aria-label="Stop">⏹</button>
                           <button data-m="play" class="big" id="m-play" aria-label="Putar">▶</button>
                           <button data-m="next" aria-label="Berikutnya">⏭</button>
+                          <span class="m-spacer"></span>
+                          <button class="ly-btn" id="ly-btn" aria-label="Tampilkan lirik">🎤 Lirik</button>
                         </div>
                       </div>
                       <div class="m-vol">
@@ -171,15 +174,15 @@
     <p>Klik kartu fitur untuk mencobanya di demo di atas.</p>
   </div>
   <div class="features">
-    <button class="feature" data-go="media"><span class="f-ico">🎵</span><h3>Kontrol media</h3><p>Lagu, artis, dan sampul album dari Spotify, YouTube, Media Player, dan lainnya. Ada tombol putar/jeda, stop, sebelumnya, berikutnya, serta pengatur volume sistem.</p></button>
+    <button class="feature" data-go="media"><span class="f-ico">🎵</span><h3>Kontrol media</h3><p>Lagu, artis, dan sampul album dari Spotify, YouTube Music, Apple Music, dan lainnya. Bila aplikasi tidak mengirim sampul, NotchNow mencarikan sampul album resminya. Ada tombol putar/jeda, stop, sebelumnya, berikutnya, serta pengatur volume.</p></button>
+    <button class="feature" data-go="lyrics"><span class="f-ico">🎤</span><h3>Lirik tersinkron <span class="new">Baru</span></h3><p>Lirik bergulir mengikuti lagu, dengan baris yang sedang dinyanyikan disorot. Saat notch tertutup, baris lirik tampil di tengah notch seperti Dynamic Island.</p></button>
     <button class="feature" data-go="todo"><span class="f-ico">✅</span><h3>To-do list</h3><p>Catat tugas dengan tanggal opsional, centang yang sudah selesai, dan saring Semua/Aktif/Selesai.</p></button>
     <button class="feature" data-go="calendar"><span class="f-ico">📅</span><h3>Kalender + Hijriah</h3><p>Kalender bulanan dengan tanggal Hijriah. Tanggal yang punya tugas diberi tanda, dan tugas bisa ditambah langsung dari kalender.</p></button>
     <button class="feature" data-go="timer"><span class="f-ico">⏱️</span><h3>Timer</h3><p>Pilihan cepat 1–60 menit atau atur sendiri. Saat waktu habis, notch membuka sendiri dan alarm berbunyi.</p></button>
     <button class="feature" data-go="alarm"><span class="f-ico">⏰</span><h3>Alarm</h3><p>Alarm sekali atau setiap hari, dengan label. Bisa dimatikan atau ditunda 5 menit.</p></button>
     <button class="feature" data-go="pray"><span class="f-ico">🕌</span><h3>Jadwal sholat</h3><p>Imsak sampai Isya sesuai lokasi Anda, hitung mundur ke sholat berikutnya, dan pengingat adzan. Metode Kemenag RI, MUIS, JAKIM, dan lainnya.</p></button>
     <button class="feature" data-go="browser"><span class="f-ico">🪄</span><h3>Mode ringkas otomatis</h3><p>Saat browser atau jendela layar penuh terbuka, notch mengecil jadi label <b>NotchNow</b> agar tidak menutupi tab. Arahkan kursor untuk membukanya lagi.</p></button>
-    <div class="feature static"><span class="f-ico">🚀</span><h3>Jalan otomatis</h3><p>NotchNow ikut berjalan setiap kali Windows dinyalakan. Bisa dimatikan dari ikon di system tray.</p></div>
-    <div class="feature static"><span class="f-ico">⌨️</span><h3>Pintasan keyboard</h3><p><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> membuka atau menyematkan notch dari mana saja. <kbd>Esc</kbd> menutup notch atau mematikan alarm.</p></div>
+    <div class="feature static"><span class="f-ico">🚀</span><h3>Jalan otomatis & pintasan</h3><p>NotchNow ikut berjalan setiap kali Windows dinyalakan. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> membuka notch dari mana saja, dan <kbd>Esc</kbd> menutup notch atau mematikan alarm.</p></div>
   </div>
 </section>
 
@@ -211,6 +214,7 @@
     <details><summary>Apakah NotchNow gratis?</summary><p>Ya, gratis sepenuhnya, tanpa iklan dan tanpa akun.</p></details>
     <details><summary>Kenapa Windows menampilkan peringatan SmartScreen?</summary><p>Peringatan itu muncul untuk aplikasi yang belum ditandatangani dengan sertifikat digital berbayar. Klik <b>More info → Run anyway</b> untuk menjalankannya.</p></details>
     <details><summary>Aplikasi musik apa saja yang didukung?</summary><p>Semua aplikasi yang tampil di kontrol media Windows, misalnya Spotify, YouTube atau YouTube Music di Chrome/Edge/Brave/Firefox, Media Player, VLC, dan Apple Music.</p></details>
+    <details><summary>Dari mana lirik dan sampul albumnya?</summary><p>Lirik diambil dari <b>LRCLIB</b>, database lirik terbuka, dan sampul album dari <b>iTunes</b>. Keduanya dicari otomatis berdasarkan judul dan nama penyanyi, lalu disimpan di cache. Lagu populer umumnya tersedia. Untuk lagu yang tidak ada liriknya akan muncul "Lirik tidak ditemukan", dan bila liriknya tanpa penanda waktu, lirik tampil statis.</p></details>
     <details><summary>Bagaimana jadwal sholat menentukan lokasi saya?</summary><p>NotchNow memakai layanan lokasi Windows. Bila layanan itu mati, lokasi diperkirakan dari IP. Anda juga bisa memilih <b>Kota manual</b> di tab Sholat. Jadwal diambil dari layanan Aladhan dengan metode Kemenag RI sebagai bawaan.</p></details>
     <details><summary>Apakah data saya dikirim ke mana-mana?</summary><p>Tidak. To-do, alarm, dan pengaturan disimpan hanya di komputer Anda (<code>%APPDATA%\NotchNow</code>). Yang dikirim keluar hanya koordinat lokasi, untuk mengambil jadwal sholat.</p></details>
     <details><summary>Bagaimana cara mematikan auto start atau menghapus aplikasi?</summary><p>Klik kanan ikon NotchNow di system tray, lalu hilangkan centang <b>Jalankan saat Windows mulai</b>. Untuk menghapus, pilih <b>Keluar</b> lalu hapus folder NotchNow.</p></details>

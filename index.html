@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NotchNow — Notch ala MacBook untuk Windows</title>
+  <meta name="description" content="NotchNow menghadirkan notch ala MacBook di Windows: kontrol musik, to-do, kalender, timer, alarm, dan jadwal sholat sesuai lokasi. Gratis untuk Windows 10/11.">
+  <meta property="og:title" content="NotchNow — Notch ala MacBook untuk Windows">
+  <meta property="og:description" content="Kontrol musik, to-do, kalender, timer, alarm, dan jadwal sholat, semua dari notch kecil di atas layar.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#05060a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='9' width='28' height='14' rx='7' fill='%23000'/%3E%3Crect x='3' y='10' width='26' height='12' rx='6' fill='none' stroke='%23fff' stroke-width='1.5'/%3E%3Ccircle cx='21' cy='16' r='2.2' fill='%2330d158'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="logo" href="#top"><span class="logo-pill"><i></i></span>NotchNow</a>
+  <div class="nav-links">
+    <a href="#fitur">Fitur</a>
+    <a href="#pasang">Cara pasang</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a class="btn btn-small download-link" href="#" data-download>Unduh</a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-text">
+    <span class="eyebrow">Gratis · Windows 10 & 11</span>
+    <h1>Notch ala MacBook,<br><span class="grad">kini di Windows.</span></h1>
+    <p class="lead">Kontrol musik, to-do, kalender, timer, alarm, dan jadwal sholat sesuai lokasi. Semuanya ada di notch kecil di atas layar, tinggal arahkan kursor.</p>
+    <div class="cta">
+      <a class="btn btn-big download-link" href="#" data-download>
+        <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+        Unduh NotchNow
+      </a>
+      <span class="dl-meta" id="dl-meta">File .zip · Windows 64-bit</span>
+    </div>
+  </div>
+
+  <!-- Demo interaktif -->
+  <div class="demo-wrap">
+    <div class="demo-bar">
+      <span class="hint" id="demo-hint">👆 Arahkan kursor (atau ketuk) ke notch di atas layar</span>
+      <label class="toggle"><input type="checkbox" id="browser-mode"><span></span>Simulasi browser terbuka</label>
+    </div>
+    <div class="screen-frame">
+      <div class="screen" id="screen">
+        <div class="stage" id="stage">
+          <div class="wallpaper"></div>
+          <div class="fake-browser" id="fake-browser">
+            <div class="fb-tabs">
+              <span class="fb-tab active">Beranda</span><span class="fb-tab">Dokumen kerja</span><span class="fb-tab">Video musik</span><span class="fb-tab">Email</span><span class="fb-tab">Berita</span>
+            </div>
+            <div class="fb-url">https://contoh.com</div>
+            <div class="fb-body"><i></i><i></i><i></i><i></i></div>
+          </div>
+
+          <!-- Replika notch -->
+          <div id="notch">
+            <div class="ear left"></div><div class="ear right"></div>
+            <div class="shell">
+              <div class="mini">
+                <span id="mini-time">--:--</span>
+                <span id="mini-right"></span>
+              </div>
+              <div class="brand"><i id="brand-dot"></i>NotchNow</div>
+              <div class="full">
+                <header class="n-head">
+                  <nav class="n-tabs" id="n-tabs">
+                    <button data-tab="media">Media</button>
+                    <button data-tab="todo">To-Do</button>
+                    <button data-tab="calendar">Kalender</button>
+                    <button data-tab="timer">Timer</button>
+                    <button data-tab="alarm">Alarm</button>
+                    <button data-tab="pray">Sholat</button>
+                  </nav>
+                  <span class="n-clock" id="n-clock"></span>
+                </header>
+                <main class="n-main">
+                  <!-- media -->
+                  <section data-tab="media">
+                    <div class="m-grid">
+                      <div class="m-art" id="m-art"><span>♪</span></div>
+                      <div class="m-info">
+                        <div class="m-app">Spotify · <span id="m-state">dijeda</span></div>
+                        <div class="m-title" id="m-title">Senja di Kota</div>
+                        <div class="m-artist" id="m-artist">Band Demo</div>
+                        <div class="m-prog"><span id="m-pos">0:00</span><div class="m-bar"><i id="m-bar"></i></div><span id="m-dur">3:24</span></div>
+                        <div class="m-ctrl">
+                          <button data-m="prev" aria-label="Sebelumnya">⏮</button>
+                          <button data-m="stop" aria-label="Stop">⏹</button>
+                          <button data-m="play" class="big" id="m-play" aria-label="Putar">▶</button>
+                          <button data-m="next" aria-label="Berikutnya">⏭</button>
+                        </div>
+                      </div>
+                      <div class="m-vol">
+                        <button data-m="voldown" aria-label="Kecilkan">−</button>
+                        <input type="range" id="m-vol" min="0" max="100" value="40" aria-label="Volume">
+                        <button data-m="volup" aria-label="Besarkan">+</button>
+                        <span id="m-vol-val">40%</span>
+                      </div>
+                    </div>
+                  </section>
+                  <!-- todo -->
+                  <section data-tab="todo">
+                    <form class="n-row" id="todo-form"><input id="todo-input" placeholder="Tambah tugas baru…" maxlength="80" autocomplete="off"><button class="n-primary">Tambah</button></form>
+                    <ul class="n-list" id="todo-list"></ul>
+                  </section>
+                  <!-- calendar -->
+                  <section data-tab="calendar">
+                    <div class="c-wrap">
+                      <div>
+                        <div class="c-head"><button id="c-prev">‹</button><b id="c-title"></b><button id="c-next">›</button></div>
+                        <div class="c-grid" id="c-grid"></div>
+                      </div>
+                      <div class="c-side">
+                        <b id="c-date"></b>
+                        <span id="c-hijri"></span>
+                        <p>Titik oranye menandai tanggal yang punya tugas. Tanggal Hijriah tampil kecil di bawah tiap tanggal.</p>
+                      </div>
+                    </div>
+                  </section>
+                  <!-- timer -->
+                  <section data-tab="timer">
+                    <div class="t-wrap">
+                      <div class="t-ring"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" class="trk"/><circle cx="100" cy="100" r="88" class="prg" id="t-prg"/></svg><div class="t-num" id="t-num">00:10</div></div>
+                      <div class="t-side">
+                        <div class="t-presets"><button data-s="10">10 dtk</button><button data-s="60">1 mnt</button><button data-s="300">5 mnt</button><button data-s="1500">25 mnt</button></div>
+                        <div class="n-row"><button class="n-primary wide" id="t-start">Mulai</button><button class="n-btn wide" id="t-reset">Reset</button></div>
+                        <p class="t-note">Coba 10 detik: saat waktu habis, notch membuka sendiri dan alarm berbunyi.</p>
+                      </div>
+                    </div>
+                  </section>
+                  <!-- alarm -->
+                  <section data-tab="alarm">
+                    <form class="n-row" id="alarm-form"><input type="time" id="alarm-time" required><input id="alarm-label" placeholder="Label" maxlength="30" autocomplete="off"><button class="n-primary">Tambah</button></form>
+                    <ul class="n-list" id="alarm-list"></ul>
+                  </section>
+                  <!-- pray -->
+                  <section data-tab="pray">
+                    <div class="p-head">
+                      <div><b id="p-place">Jakarta, Indonesia</b><span id="p-sub">Contoh jadwal · metode Kemenag RI</span></div>
+                      <div class="p-cd"><span id="p-next">Menuju —</span><b id="p-count">--:--:--</b></div>
+                    </div>
+                    <div class="p-grid" id="p-grid"></div>
+                    <button class="n-btn p-loc" id="p-loc">📍 Pakai lokasi saya</button>
+                  </section>
+                </main>
+                <div class="n-alert" id="n-alert" hidden>
+                  <div class="a-ico">🔔</div>
+                  <div class="a-txt"><b id="a-title">Timer selesai!</b><span id="a-body">Waktu telah habis.</span></div>
+                  <button class="n-primary" id="a-stop">Matikan</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="fitur">
+  <div class="sec-head">
+    <span class="eyebrow">Fitur</span>
+    <h2>Semua yang Anda butuhkan, satu notch.</h2>
+    <p>Klik kartu fitur untuk mencobanya di demo di atas.</p>
+  </div>
+  <div class="features">
+    <button class="feature" data-go="media"><span class="f-ico">🎵</span><h3>Kontrol media</h3><p>Lagu, artis, dan sampul album dari Spotify, YouTube, Media Player, dan lainnya. Ada tombol putar/jeda, stop, sebelumnya, berikutnya, serta pengatur volume sistem.</p></button>
+    <button class="feature" data-go="todo"><span class="f-ico">✅</span><h3>To-do list</h3><p>Catat tugas dengan tanggal opsional, centang yang sudah selesai, dan saring Semua/Aktif/Selesai.</p></button>
+    <button class="feature" data-go="calendar"><span class="f-ico">📅</span><h3>Kalender + Hijriah</h3><p>Kalender bulanan dengan tanggal Hijriah. Tanggal yang punya tugas diberi tanda, dan tugas bisa ditambah langsung dari kalender.</p></button>
+    <button class="feature" data-go="timer"><span class="f-ico">⏱️</span><h3>Timer</h3><p>Pilihan cepat 1–60 menit atau atur sendiri. Saat waktu habis, notch membuka sendiri dan alarm berbunyi.</p></button>
+    <button class="feature" data-go="alarm"><span class="f-ico">⏰</span><h3>Alarm</h3><p>Alarm sekali atau setiap hari, dengan label. Bisa dimatikan atau ditunda 5 menit.</p></button>
+    <button class="feature" data-go="pray"><span class="f-ico">🕌</span><h3>Jadwal sholat</h3><p>Imsak sampai Isya sesuai lokasi Anda, hitung mundur ke sholat berikutnya, dan pengingat adzan. Metode Kemenag RI, MUIS, JAKIM, dan lainnya.</p></button>
+    <button class="feature" data-go="browser"><span class="f-ico">🪄</span><h3>Mode ringkas otomatis</h3><p>Saat browser atau jendela layar penuh terbuka, notch mengecil jadi label <b>NotchNow</b> agar tidak menutupi tab. Arahkan kursor untuk membukanya lagi.</p></button>
+    <div class="feature static"><span class="f-ico">🚀</span><h3>Jalan otomatis</h3><p>NotchNow ikut berjalan setiap kali Windows dinyalakan. Bisa dimatikan dari ikon di system tray.</p></div>
+    <div class="feature static"><span class="f-ico">⌨️</span><h3>Pintasan keyboard</h3><p><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> membuka atau menyematkan notch dari mana saja. <kbd>Esc</kbd> menutup notch atau mematikan alarm.</p></div>
+  </div>
+</section>
+
+<section class="section" id="pasang">
+  <div class="sec-head">
+    <span class="eyebrow">Cara pasang</span>
+    <h2>Siap dalam satu menit.</h2>
+  </div>
+  <ol class="steps">
+    <li><span class="n">1</span><div><h3>Unduh file zip</h3><p>Klik tombol <b>Unduh NotchNow</b> untuk mendapatkan <code>NotchNow-win-x64.zip</code>.</p></div></li>
+    <li><span class="n">2</span><div><h3>Ekstrak ke folder tetap</h3><p>Klik kanan file zip, pilih <b>Extract All</b>, lalu simpan foldernya di tempat yang tidak akan dihapus, misalnya <code>Documents\NotchNow</code>.</p></div></li>
+    <li><span class="n">3</span><div><h3>Jalankan NotchNow.exe</h3><p>Bila muncul <b>“Windows protected your PC”</b>, klik <b>More info</b> lalu <b>Run anyway</b>. Peringatan ini muncul karena aplikasi belum ditandatangani digital.</p></div></li>
+    <li><span class="n">4</span><div><h3>Arahkan kursor ke atas layar</h3><p>Notch hitam muncul di tengah atas layar. Mulai sekarang NotchNow berjalan otomatis setiap Windows dinyalakan.</p></div></li>
+  </ol>
+  <div class="req">
+    <div><b>Sistem</b><span>Windows 10 / 11, 64-bit</span></div>
+    <div><b>Ukuran</b><span id="req-size">± 105 MB</span></div>
+    <div><b>Internet</b><span>Untuk jadwal sholat, sekali sehari</span></div>
+    <div><b>Lokasi</b><span>Layanan lokasi Windows atau perkiraan dari IP</span></div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="sec-head">
+    <span class="eyebrow">FAQ</span>
+    <h2>Pertanyaan yang sering muncul</h2>
+  </div>
+  <div class="faq">
+    <details><summary>Apakah NotchNow gratis?</summary><p>Ya, gratis sepenuhnya, tanpa iklan dan tanpa akun.</p></details>
+    <details><summary>Kenapa Windows menampilkan peringatan SmartScreen?</summary><p>Peringatan itu muncul untuk aplikasi yang belum ditandatangani dengan sertifikat digital berbayar. Klik <b>More info → Run anyway</b> untuk menjalankannya.</p></details>
+    <details><summary>Aplikasi musik apa saja yang didukung?</summary><p>Semua aplikasi yang tampil di kontrol media Windows, misalnya Spotify, YouTube atau YouTube Music di Chrome/Edge/Brave/Firefox, Media Player, VLC, dan Apple Music.</p></details>
+    <details><summary>Bagaimana jadwal sholat menentukan lokasi saya?</summary><p>NotchNow memakai layanan lokasi Windows. Bila layanan itu mati, lokasi diperkirakan dari IP. Anda juga bisa memilih <b>Kota manual</b> di tab Sholat. Jadwal diambil dari layanan Aladhan dengan metode Kemenag RI sebagai bawaan.</p></details>
+    <details><summary>Apakah data saya dikirim ke mana-mana?</summary><p>Tidak. To-do, alarm, dan pengaturan disimpan hanya di komputer Anda (<code>%APPDATA%\NotchNow</code>). Yang dikirim keluar hanya koordinat lokasi, untuk mengambil jadwal sholat.</p></details>
+    <details><summary>Bagaimana cara mematikan auto start atau menghapus aplikasi?</summary><p>Klik kanan ikon NotchNow di system tray, lalu hilangkan centang <b>Jalankan saat Windows mulai</b>. Untuk menghapus, pilih <b>Keluar</b> lalu hapus folder NotchNow.</p></details>
+    <details><summary>Notch menutupi tab browser saya.</summary><p>NotchNow otomatis mengecil menjadi label kecil saat browser atau jendela layar penuh ada di bawahnya. Coba sakelar <b>Simulasi browser terbuka</b> di demo di atas.</p></details>
+  </div>
+</section>
+
+<section class="final">
+  <h2>Siap mencoba NotchNow?</h2>
+  <a class="btn btn-big download-link" href="#" data-download>
+    <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+    Unduh gratis untuk Windows
+  </a>
+  <span class="dl-meta" id="dl-meta-2">NotchNow-win-x64.zip</span>
+</section>
+
+<footer class="foot">
+  <span>© 2026 Darryl Fatha · NotchNow</span>
+  <a href="https://github.com/darrylfatha/NotchNow-web/releases" target="_blank" rel="noopener">Semua versi</a>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -29,7 +29,7 @@
 
 <header class="hero" id="top">
   <div class="hero-text">
-    <span class="eyebrow">Baru di v1.1: lirik tersinkron 🎤</span>
+    <span class="eyebrow">Baru di v1.2: slider lagu & startup lebih cepat ⚡</span>
     <h1>Notch ala MacBook,<br><span class="grad">kini di Windows.</span></h1>
     <p class="lead">Kontrol musik dengan lirik tersinkron, to-do, kalender, timer, alarm, dan jadwal sholat sesuai lokasi. Semuanya ada di notch kecil di atas layar, tinggal arahkan kursor.</p>
     <div class="cta">
@@ -90,7 +90,7 @@
                         <div class="m-title" id="m-title">Senja di Kota</div>
                         <div class="m-artist" id="m-artist">Band Demo</div>
                         <div class="m-lyrics" id="m-lyrics"><div id="ly-track"></div></div>
-                        <div class="m-prog"><span id="m-pos">0:00</span><div class="m-bar"><i id="m-bar"></i></div><span id="m-dur">3:24</span></div>
+                        <div class="m-prog"><span id="m-pos">0:00</span><input type="range" id="m-seek" min="0" max="1000" value="0" aria-label="Posisi lagu"><span id="m-dur">3:24</span></div>
                         <div class="m-ctrl">
                           <button data-m="prev" aria-label="Sebelumnya">⏮</button>
                           <button data-m="stop" aria-label="Stop">⏹</button>
@@ -174,15 +174,15 @@
     <p>Klik kartu fitur untuk mencobanya di demo di atas.</p>
   </div>
   <div class="features">
-    <button class="feature" data-go="media"><span class="f-ico">🎵</span><h3>Kontrol media</h3><p>Lagu, artis, dan sampul album dari Spotify, YouTube Music, Apple Music, dan lainnya. Bila aplikasi tidak mengirim sampul, NotchNow mencarikan sampul album resminya. Ada tombol putar/jeda, stop, sebelumnya, berikutnya, serta pengatur volume.</p></button>
-    <button class="feature" data-go="lyrics"><span class="f-ico">🎤</span><h3>Lirik tersinkron <span class="new">Baru</span></h3><p>Lirik bergulir mengikuti lagu, dengan baris yang sedang dinyanyikan disorot. Saat notch tertutup, baris lirik tampil di tengah notch seperti Dynamic Island.</p></button>
+    <button class="feature" data-go="media"><span class="f-ico">🎵</span><h3>Kontrol media</h3><p>Lagu, artis, dan sampul album dari Spotify, YouTube Music, Apple Music, dan lainnya. Bila aplikasi tidak mengirim sampul, NotchNow mencarikan sampul album resminya. Ada tombol putar/jeda, stop, sebelumnya, berikutnya, slider untuk memajukan atau memundurkan lagu <span class="new">Baru</span>, serta pengatur volume.</p></button>
+    <button class="feature" data-go="lyrics"><span class="f-ico">🎤</span><h3>Lirik tersinkron</h3><p>Lirik bergulir mengikuti lagu, dengan baris yang sedang dinyanyikan disorot. Saat notch tertutup, baris lirik tampil di tengah notch seperti Dynamic Island.</p></button>
     <button class="feature" data-go="todo"><span class="f-ico">✅</span><h3>To-do list</h3><p>Catat tugas dengan tanggal opsional, centang yang sudah selesai, dan saring Semua/Aktif/Selesai.</p></button>
     <button class="feature" data-go="calendar"><span class="f-ico">📅</span><h3>Kalender + Hijriah</h3><p>Kalender bulanan dengan tanggal Hijriah. Tanggal yang punya tugas diberi tanda, dan tugas bisa ditambah langsung dari kalender.</p></button>
     <button class="feature" data-go="timer"><span class="f-ico">⏱️</span><h3>Timer</h3><p>Pilihan cepat 1–60 menit atau atur sendiri. Saat waktu habis, notch membuka sendiri dan alarm berbunyi.</p></button>
     <button class="feature" data-go="alarm"><span class="f-ico">⏰</span><h3>Alarm</h3><p>Alarm sekali atau setiap hari, dengan label. Bisa dimatikan atau ditunda 5 menit.</p></button>
     <button class="feature" data-go="pray"><span class="f-ico">🕌</span><h3>Jadwal sholat</h3><p>Imsak sampai Isya sesuai lokasi Anda, hitung mundur ke sholat berikutnya, dan pengingat adzan. Metode Kemenag RI, MUIS, JAKIM, dan lainnya.</p></button>
     <button class="feature" data-go="browser"><span class="f-ico">🪄</span><h3>Mode ringkas otomatis</h3><p>Saat browser atau jendela layar penuh terbuka, notch mengecil jadi label <b>NotchNow</b> agar tidak menutupi tab. Arahkan kursor untuk membukanya lagi.</p></button>
-    <div class="feature static"><span class="f-ico">🚀</span><h3>Jalan otomatis & pintasan</h3><p>NotchNow ikut berjalan setiap kali Windows dinyalakan. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> membuka notch dari mana saja, dan <kbd>Esc</kbd> menutup notch atau mematikan alarm.</p></div>
+    <div class="feature static"><span class="f-ico">🚀</span><h3>Jalan otomatis & pintasan</h3><p>NotchNow langsung muncul saat Anda login ke Windows, tanpa menunggu aplikasi startup lain. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> membuka notch dari mana saja, dan <kbd>Esc</kbd> menutup notch atau mematikan alarm.</p></div>
   </div>
 </section>
 
@@ -193,14 +193,14 @@
   </div>
   <ol class="steps">
     <li><span class="n">1</span><div><h3>Unduh file zip</h3><p>Klik tombol <b>Unduh NotchNow</b> untuk mendapatkan <code>NotchNow-win-x64.zip</code>.</p></div></li>
-    <li><span class="n">2</span><div><h3>Ekstrak ke folder tetap</h3><p>Klik kanan file zip, pilih <b>Extract All</b>, lalu simpan foldernya di tempat yang tidak akan dihapus, misalnya <code>Documents\NotchNow</code>.</p></div></li>
-    <li><span class="n">3</span><div><h3>Jalankan NotchNow.exe</h3><p>Bila muncul <b>“Windows protected your PC”</b>, klik <b>More info</b> lalu <b>Run anyway</b>. Peringatan ini muncul karena aplikasi belum ditandatangani digital.</p></div></li>
-    <li><span class="n">4</span><div><h3>Arahkan kursor ke atas layar</h3><p>Notch hitam muncul di tengah atas layar. Mulai sekarang NotchNow berjalan otomatis setiap Windows dinyalakan.</p></div></li>
+    <li><span class="n">2</span><div><h3>Ekstrak ke folder tetap</h3><p>Klik kanan file zip, pilih <b>Extract All</b>, lalu simpan foldernya di tempat yang tidak akan dihapus, misalnya <code>Documents\NotchNow</code>. Biarkan semua file tetap di dalam folder itu.</p></div></li>
+    <li><span class="n">3</span><div><h3>Jalankan NotchNow.exe</h3><p>Buka folder hasil ekstrak, lalu klik dua kali <code>NotchNow.exe</code>. Bila muncul <b>“Windows protected your PC”</b>, klik <b>More info</b> lalu <b>Run anyway</b>. Peringatan ini muncul karena aplikasi belum ditandatangani digital.</p></div></li>
+    <li><span class="n">4</span><div><h3>Arahkan kursor ke atas layar</h3><p>Notch hitam muncul di tengah atas layar. Mulai sekarang NotchNow berjalan otomatis setiap Anda login ke Windows.</p></div></li>
   </ol>
   <div class="req">
     <div><b>Sistem</b><span>Windows 10 / 11, 64-bit</span></div>
-    <div><b>Ukuran</b><span id="req-size">± 105 MB</span></div>
-    <div><b>Internet</b><span>Untuk jadwal sholat, sekali sehari</span></div>
+    <div><b>Ukuran</b><span id="req-size">± 151 MB</span></div>
+    <div><b>Internet</b><span>Untuk jadwal sholat, lirik, dan sampul album</span></div>
     <div><b>Lokasi</b><span>Layanan lokasi Windows atau perkiraan dari IP</span></div>
   </div>
 </section>
@@ -217,7 +217,9 @@
     <details><summary>Dari mana lirik dan sampul albumnya?</summary><p>Lirik diambil dari <b>LRCLIB</b>, database lirik terbuka, dan sampul album dari <b>iTunes</b>. Keduanya dicari otomatis berdasarkan judul dan nama penyanyi, lalu disimpan di cache. Lagu populer umumnya tersedia. Untuk lagu yang tidak ada liriknya akan muncul "Lirik tidak ditemukan", dan bila liriknya tanpa penanda waktu, lirik tampil statis.</p></details>
     <details><summary>Bagaimana jadwal sholat menentukan lokasi saya?</summary><p>NotchNow memakai layanan lokasi Windows. Bila layanan itu mati, lokasi diperkirakan dari IP. Anda juga bisa memilih <b>Kota manual</b> di tab Sholat. Jadwal diambil dari layanan Aladhan dengan metode Kemenag RI sebagai bawaan.</p></details>
     <details><summary>Apakah data saya dikirim ke mana-mana?</summary><p>Tidak. To-do, alarm, dan pengaturan disimpan hanya di komputer Anda (<code>%APPDATA%\NotchNow</code>). Yang dikirim keluar hanya koordinat lokasi, untuk mengambil jadwal sholat.</p></details>
-    <details><summary>Bagaimana cara mematikan auto start atau menghapus aplikasi?</summary><p>Klik kanan ikon NotchNow di system tray, lalu hilangkan centang <b>Jalankan saat Windows mulai</b>. Untuk menghapus, pilih <b>Keluar</b> lalu hapus folder NotchNow.</p></details>
+    <details><summary>Bagaimana cara mematikan auto start atau menghapus aplikasi?</summary><p>Klik kanan ikon NotchNow di system tray, lalu hilangkan centang <b>Jalankan saat Windows mulai</b>. Untuk menghapus, hilangkan dulu centang itu, pilih <b>Keluar</b>, lalu hapus folder NotchNow.</p></details>
+    <details><summary>Bagaimana cara memperbarui dari versi lama?</summary><p>Klik kanan ikon NotchNow di system tray, pilih <b>Keluar</b>, hapus <code>NotchNow.exe</code> atau folder lamanya, lalu ekstrak zip terbaru dan jalankan <code>NotchNow.exe</code> dari folder baru. To-do, alarm, dan pengaturan tetap tersimpan, dan auto start ikut diperbarui.</p></details>
+    <details><summary>Slider lagu berfungsi di aplikasi apa saja?</summary><p>Slider memakai kontrol media Windows, jadi bergantung pada dukungan aplikasi musiknya. Untuk <b>Apple Music</b>, NotchNow punya jalur khusus, dan jendela Apple Music harus tetap terbuka (boleh di-minimize). Bila aplikasi tidak mendukung, slider tampil redup.</p></details>
     <details><summary>Notch menutupi tab browser saya.</summary><p>NotchNow otomatis mengecil menjadi label kecil saat browser atau jendela layar penuh ada di bawahnya. Coba sakelar <b>Simulasi browser terbuka</b> di demo di atas.</p></details>
   </div>
 </section>

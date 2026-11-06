@@ -170,8 +170,9 @@ li:hover .del { opacity: 1; }
 .m-title { font-size: 19px; font-weight: 700; margin-top: 2px; }
 .m-artist { color: #8e8e93; font-size: 12.5px; }
 .m-prog { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 10.5px; color: #8e8e93; font-variant-numeric: tabular-nums; }
-.m-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, .12); border-radius: 2px; overflow: hidden; }
-.m-bar i { display: block; height: 100%; width: 0; background: #fff; }
+#m-seek { flex: 1; min-width: 0; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; cursor: pointer; background: linear-gradient(to right, #fff var(--p, 0%), rgba(255, 255, 255, .14) var(--p, 0%)); }
+#m-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 11px; height: 11px; border-radius: 50%; background: #fff; }
+#m-seek::-moz-range-thumb { width: 11px; height: 11px; border-radius: 50%; background: #fff; border: none; }
 .m-ctrl { display: flex; gap: 10px; margin-top: 10px; align-items: center; }
 .m-ctrl button { width: 36px; height: 36px; border-radius: 50%; font-size: 14px; display: grid; place-items: center; }
 .m-ctrl button:hover { background: rgba(255, 255, 255, .12); }

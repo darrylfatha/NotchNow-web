@@ -205,6 +205,7 @@ let song = 0;
 let pos = 0;
 let playing = false;
 let vol = 40;
+let seekDrag = false;
 function renderMedia() {
   const s = SONGS[song];
   if ($('#ly-track').dataset.song !== String(song)) { $('#ly-track').dataset.song = String(song); renderLyrics(); }
@@ -216,9 +217,12 @@ function renderMedia() {
   $('#m-art').classList.toggle('playing', playing);
   $('#m-play').textContent = playing ? '⏸' : '▶';
   $('#m-state').textContent = playing ? 'memutar' : 'dijeda';
-  $('#m-pos').textContent = mmss(pos);
+  if (!seekDrag) $('#m-pos').textContent = mmss(pos);
   $('#m-dur').textContent = mmss(s.dur);
-  $('#m-bar').style.width = `${(pos / s.dur) * 100}%`;
+  if (!seekDrag) {
+    $('#m-seek').value = (pos / s.dur) * 1000;
+    $('#m-seek').style.setProperty('--p', `${(pos / s.dur) * 100}%`);
+  }
   const sl = $('#m-vol');
   sl.value = vol;
   sl.style.setProperty('--p', vol + '%');
@@ -235,6 +239,18 @@ $$('[data-m]').forEach((b) => b.addEventListener('click', (e) => {
   if (m === 'voldown') vol = Math.max(0, vol - 5);
   renderMedia();
 }));
+// Slider untuk memajukan / memundurkan lagu demo.
+$('#m-seek').addEventListener('input', (e) => {
+  seekDrag = true;
+  const v = Number(e.target.value) / 1000;
+  e.target.style.setProperty('--p', `${v * 100}%`);
+  $('#m-pos').textContent = mmss(v * SONGS[song].dur);
+});
+$('#m-seek').addEventListener('change', (e) => {
+  seekDrag = false;
+  pos = (Number(e.target.value) / 1000) * SONGS[song].dur;
+  renderMedia();
+});
 $('#m-vol').addEventListener('input', (e) => { vol = Number(e.target.value); renderMedia(); });
 renderMedia();
 

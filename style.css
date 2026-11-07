@@ -330,3 +330,41 @@ button.feature:hover h3::after { opacity: 1; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ---------- v1.3: tema sampul album di demo ---------- */
+.art-bg { position: absolute; inset: -40%; z-index: 0; opacity: 0; pointer-events: none; background: var(--art, none);
+  filter: blur(46px) saturate(1.4) brightness(.55); transition: opacity .8s ease; animation: art-spin 28s linear infinite; }
+#notch.open.art-mode .art-bg { opacity: 1; }
+#notch.paused .art-bg { animation-play-state: paused; }
+@keyframes art-spin { from { transform: rotate(0deg) scale(1.1); } to { transform: rotate(360deg) scale(1.1); } }
+.mini, .brand, .full { z-index: 1; }
+#notch.art-mode .m-app { color: var(--accent2, #30d158); }
+#notch.art-mode .m-art { box-shadow: 0 12px 30px rgba(0, 0, 0, .45); transition: transform .7s cubic-bezier(.34, 1.56, .64, 1); }
+#notch.art-mode.paused .m-art { transform: scale(.88); animation: none; }
+#notch.art-mode #m-seek { background: linear-gradient(to right, var(--accent2, #fff) var(--p, 0%), rgba(255, 255, 255, .22) var(--p, 0%)); }
+#notch.art-mode .ly-line.active { text-shadow: 0 0 12px var(--accent2, transparent); }
+#notch.art-mode:not(.paused) .m-ctrl .big { animation: halo 2.4s ease-out infinite; }
+@keyframes halo { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent2, #fff) 55%, transparent); } 100% { box-shadow: 0 0 0 12px transparent; } }
+
+/* ---------- v1.3: liquid glass di demo ---------- */
+.n-tabs, .m-vol { position: relative; isolation: isolate;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, .035) 55%, rgba(255, 255, 255, .07));
+  -webkit-backdrop-filter: blur(15px) saturate(156%); backdrop-filter: blur(15px) saturate(156%);
+  border: 1px solid rgba(255, 255, 255, .11);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .27), inset 0 -1px 1px rgba(255, 255, 255, .07), 0 6px 18px rgba(0, 0, 0, .2); }
+.n-tabs::before, .m-vol::before { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+  background: radial-gradient(110px 50px at var(--gx, 30%) var(--gy, 0%), rgba(255, 255, 255, .16), transparent 70%); }
+.n-tabs::after, .m-vol::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; padding: 1px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .4), rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, .13));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.n-tabs button.active { background: linear-gradient(180deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .1)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .32), 0 2px 8px rgba(0, 0, 0, .2); }
+
+/* ---------- v1.3: label NotchNow berkilau ---------- */
+.brand-text { background: linear-gradient(100deg, rgba(255, 255, 255, .74) 38%, #fff 50%, rgba(255, 255, 255, .74) 62%);
+  background-size: 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+#notch.compact:not(.open) .brand-text { animation: shine 3.6s ease-in-out infinite, twinkle 3.6s ease-in-out infinite; }
+@keyframes shine { 0% { background-position: 130% 0; } 55%, 100% { background-position: -30% 0; } }
+@keyframes twinkle { 0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0)); }
+  30% { filter: drop-shadow(0 0 3px rgba(255, 255, 255, .8)) drop-shadow(0 0 8px rgba(255, 255, 255, .4)); }
+  60% { filter: drop-shadow(0 0 2px rgba(255, 255, 255, .3)); } }
+@media (prefers-reduced-motion: reduce) { .art-bg, .brand-text { animation: none !important; } }

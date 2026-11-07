@@ -153,13 +153,13 @@ $('#a-stop').addEventListener('click', (e) => { e.stopPropagation(); stopRing();
 // ================= Media (simulasi) =================
 // Lirik contoh di bawah ini ditulis khusus untuk demo (bukan lirik lagu sungguhan).
 const SONGS = [
-  { title: 'Senja di Kota', artist: 'Band Demo', dur: 204, art: 'linear-gradient(135deg,#ff7a59,#b33cff 55%,#3a4bff)',
+  { title: 'Senja di Kota', artist: 'Band Demo', dur: 204, art: 'linear-gradient(135deg,#ff7a59,#b33cff 55%,#3a4bff)', accent: '#d9a6ff',
     lyrics: ['Lampu kota mulai menyala', 'Langkahku pelan di trotoar', 'Senja jingga menyapa kita', 'Di antara riuh yang samar',
       'Biar waktu terus berjalan', 'Aku tetap di sini menunggu', 'Senja di kota, peluk aku', 'Sebelum malam datang merayu', '♪'] },
-  { title: 'Hujan Pertama', artist: 'Kilau Biru', dur: 187, art: 'linear-gradient(135deg,#30d158,#0a84ff)',
+  { title: 'Hujan Pertama', artist: 'Kilau Biru', dur: 187, art: 'linear-gradient(135deg,#30d158,#0a84ff)', accent: '#7fe0ff',
     lyrics: ['Rintik pertama jatuh di jendela', 'Aroma tanah memanggil namamu', 'Kubiarkan basah menyentuh kepala', 'Seperti dulu saat kau di situ',
       'Hujan pertama, jangan cepat reda', 'Biar kuingat semua yang tersisa', '♪'] },
-  { title: 'Jalan Pulang', artist: 'Orkes Malam', dur: 231, art: 'linear-gradient(135deg,#ffd60a,#ff375f)',
+  { title: 'Jalan Pulang', artist: 'Orkes Malam', dur: 231, art: 'linear-gradient(135deg,#ffd60a,#ff375f)', accent: '#ffc27a',
     lyrics: ['Jalan pulang terasa panjang', 'Lampu-lampu berbaris tenang', 'Kuhitung bintang satu per satu', 'Sambil bersenandung lagu lamamu',
       'Bawa aku pulang, pulang', 'Ke tempat hatiku tenang', '♪'] },
 ];
@@ -211,6 +211,10 @@ function renderMedia() {
   if ($('#ly-track').dataset.song !== String(song)) { $('#ly-track').dataset.song = String(song); renderLyrics(); }
   updateLyrics();
   $('#mini-art').style.background = s.art;
+  notch.style.setProperty('--art', s.art);
+  notch.style.setProperty('--accent2', s.accent);
+  notch.classList.add('art-mode');
+  notch.classList.toggle('paused', !playing);
   $('#m-title').textContent = s.title;
   $('#m-artist').textContent = s.artist;
   $('#m-art').style.background = s.art;
@@ -498,3 +502,12 @@ function tick() {
 }
 tick();
 setInterval(tick, 250);
+
+document.querySelectorAll('.n-tabs, .m-vol').forEach((el) => {
+  el.addEventListener('pointermove', (e) => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--gx', ((e.clientX - r.left) / r.width) * 100 + '%');
+    el.style.setProperty('--gy', ((e.clientY - r.top) / r.height) * 100 + '%');
+  });
+  el.addEventListener('pointerleave', () => { el.style.removeProperty('--gx'); el.style.removeProperty('--gy'); });
+});

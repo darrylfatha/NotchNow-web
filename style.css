@@ -291,6 +291,16 @@ button.feature:hover { transform: translateY(-3px); border-color: rgba(124, 196,
 button.feature h3::after { content: '  →'; color: #7cc4ff; opacity: 0; transition: opacity .2s; }
 button.feature:hover h3::after { opacity: 1; }
 
+.guide { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; background: linear-gradient(135deg, rgba(10, 132, 255, .12), rgba(98, 75, 255, .08) 60%, transparent); border: 1px solid var(--line); border-radius: 28px; padding: 48px; }
+.guide-text { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.guide-text p { color: var(--muted); margin-bottom: 18px; }
+.guide .cta { display: flex; flex-direction: row; align-items: center; gap: 22px; flex-wrap: wrap; margin: 0 0 8px; }
+.guide-link { color: #7cc4ff; font-weight: 600; }
+.guide-link:hover { text-decoration: underline; }
+.guide-shot { display: block; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 80px rgba(0, 0, 0, .55); transform: rotate(-1.5deg); transition: transform .3s var(--ease); }
+.guide-shot:hover { transform: rotate(0) scale(1.02); }
+.guide-shot img { display: block; width: 100%; height: auto; }
+
 .steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
 .steps li { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
 .steps .n { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #7cc4ff, #b69cff); color: #000; font-weight: 800; display: grid; place-items: center; }
@@ -317,6 +327,7 @@ button.feature:hover h3::after { opacity: 1; }
 @media (max-width: 900px) {
   .features { grid-template-columns: repeat(2, 1fr); }
   .steps, .req { grid-template-columns: repeat(2, 1fr); }
+  .guide { grid-template-columns: 1fr; padding: 32px 24px; gap: 32px; }
   .nav-links { display: none; }
   .nav .btn-small { margin-left: auto; }
 }

@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NotchNow — Notch ala MacBook untuk Windows</title>
-  <meta name="description" content="NotchNow menghadirkan notch ala MacBook di Windows: kontrol musik, to-do, kalender, timer, alarm, dan jadwal sholat sesuai lokasi. Gratis untuk Windows 10/11.">
+  <meta name="description" content="NotchNow menghadirkan notch ala MacBook di Windows: kontrol musik, to-do, kalender libur nasional, catatan, rak file, clipboard, peluncur, timer, alarm, dan jadwal sholat. Gratis untuk Windows 10/11.">
   <meta property="og:title" content="NotchNow — Notch ala MacBook untuk Windows">
-  <meta property="og:description" content="Kontrol musik, to-do, kalender, timer, alarm, dan jadwal sholat, semua dari notch kecil di atas layar.">
+  <meta property="og:description" content="Kontrol musik, to-do, kalender, catatan, rak file, clipboard, peluncur, timer, alarm, dan jadwal sholat, semua dari notch kecil di atas layar.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#05060a">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='9' width='28' height='14' rx='7' fill='%23000'/%3E%3Crect x='3' y='10' width='26' height='12' rx='6' fill='none' stroke='%23fff' stroke-width='1.5'/%3E%3Ccircle cx='21' cy='16' r='2.2' fill='%2330d158'/%3E%3C/svg%3E">
@@ -22,6 +22,7 @@
   <div class="nav-links">
     <a href="#fitur">Fitur</a>
     <a href="#pasang">Cara pasang</a>
+    <a href="#panduan">Panduan</a>
     <a href="#faq">FAQ</a>
   </div>
   <a class="btn btn-small download-link" href="#" data-download>Unduh</a>
@@ -29,9 +30,9 @@
 
 <header class="hero" id="top">
   <div class="hero-text">
-    <span class="eyebrow">Baru di v1.3: tema sampul album & liquid glass ✨</span>
+    <span class="eyebrow">Baru di v1.5: rak file, clipboard, peluncur & libur nasional ✨</span>
     <h1>Notch ala MacBook,<br><span class="grad">kini di Windows.</span></h1>
-    <p class="lead">Kontrol musik dengan lirik tersinkron, to-do, kalender, timer, alarm, dan jadwal sholat sesuai lokasi. Semuanya ada di notch kecil di atas layar, tinggal arahkan kursor.</p>
+    <p class="lead">Kontrol musik dengan lirik tersinkron, to-do dengan pengingat, kalender libur nasional, catatan, rak file, riwayat clipboard, peluncur cepat, timer, alarm, dan jadwal sholat. Semuanya ada di notch kecil di atas layar, tinggal arahkan kursor.</p>
     <div class="cta">
       <a class="btn btn-big download-link" href="#" data-download>
         <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
@@ -177,13 +178,16 @@
   <div class="features">
     <button class="feature" data-go="media"><span class="f-ico">🎵</span><h3>Kontrol media</h3><p>Lagu, artis, dan sampul album dari Spotify, YouTube Music, Apple Music, dan lainnya. Bila aplikasi tidak mengirim sampul, NotchNow mencarikan sampul album resminya. Ada tombol putar/jeda, stop, sebelumnya, berikutnya, slider untuk memajukan atau memundurkan lagu, serta pengatur volume.</p></button>
     <button class="feature" data-go="lyrics"><span class="f-ico">🎤</span><h3>Lirik tersinkron</h3><p>Lirik bergulir mengikuti lagu, dengan baris yang sedang dinyanyikan disorot. Saat notch tertutup, baris lirik tampil di tengah notch seperti Dynamic Island.</p></button>
-    <button class="feature" data-go="todo"><span class="f-ico">✅</span><h3>To-do list</h3><p>Catat tugas dengan tanggal opsional, centang yang sudah selesai, dan saring Semua/Aktif/Selesai.</p></button>
-    <button class="feature" data-go="calendar"><span class="f-ico">📅</span><h3>Kalender + Hijriah</h3><p>Kalender bulanan dengan tanggal Hijriah. Tanggal yang punya tugas diberi tanda, dan tugas bisa ditambah langsung dari kalender.</p></button>
+    <button class="feature" data-go="media"><span class="f-ico">🎨</span><h3>Tema sampul & liquid glass</h3><p>Latar notch berubah mengikuti warna sampul album yang sedang diputar. Bar tab dan volume bergaya kaca cair iOS, dan transparansi latar maupun kekuatan efek kacanya bisa diatur.</p></button>
+    <button class="feature" data-go="todo"><span class="f-ico">✅</span><h3>To-do lengkap <span class="new">Baru</span></h3><p>Tugas dengan tanggal, jam pengingat, prioritas, dan pengulangan harian, mingguan, atau bulanan. Pengingat bisa ditunda 10 menit atau langsung ditandai selesai.</p></button>
+    <button class="feature" data-go="calendar"><span class="f-ico">📅</span><h3>Libur nasional & cuti bersama <span class="new">Baru</span></h3><p>Kalender bulanan dengan tanggal Hijriah, libur nasional merah dan cuti bersama oranye, plus hitung mundur ke hari libur berikutnya.</p></button>
+    <div class="feature static"><span class="f-ico">📝</span><h3>Catatan cepat <span class="new">Baru</span></h3><p>Tulis ide atau nomor penting dalam sekejap. Catatan tersimpan otomatis dan bisa disalin. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Q</kbd> langsung membukanya.</p></div>
+    <div class="feature static"><span class="f-ico">📂</span><h3>Rak file <span class="new">Baru</span></h3><p>Seret file ke notch untuk disimpan sementara, pindah ke jendela lain, lalu seret keluar ke email, chat, atau folder tujuan.</p></div>
+    <div class="feature static"><span class="f-ico">📋</span><h3>Riwayat clipboard <span class="new">Baru</span></h3><p>50 teks dan 8 gambar terakhir yang Anda salin. Klik untuk menyalin ulang, sematkan yang sering dipakai, atau jeda pencatatan.</p></div>
+    <div class="feature static"><span class="f-ico">🔎</span><h3>Peluncur cepat <span class="new">Baru</span></h3><p>Buka aplikasi, hitung, konversi satuan, atau cari di Google dari satu kotak. Tekan <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Space</kbd> dari mana saja.</p></div>
     <button class="feature" data-go="timer"><span class="f-ico">⏱️</span><h3>Timer & alarm</h3><p>Timer 1–60 menit atau atur sendiri, dan alarm sekali atau setiap hari. Saat waktunya tiba, notch membuka sendiri dan berbunyi; alarm bisa ditunda 5 menit.</p></button>
-    <button class="feature" data-go="media"><span class="f-ico">🎨</span><h3>Tema sampul & liquid glass <span class="new">Baru</span></h3><p>Latar notch berubah mengikuti warna sampul album yang sedang diputar. Bar tab dan volume bergaya kaca cair iOS, dan transparansi latar maupun kekuatan efek kacanya bisa diatur.</p></button>
     <button class="feature" data-go="pray"><span class="f-ico">🕌</span><h3>Jadwal sholat</h3><p>Imsak sampai Isya sesuai lokasi Anda, hitung mundur ke sholat berikutnya, dan pengingat adzan. Metode Kemenag RI, MUIS, JAKIM, dan lainnya.</p></button>
-    <button class="feature" data-go="browser"><span class="f-ico">🪄</span><h3>Mode ringkas otomatis</h3><p>Saat browser atau jendela layar penuh terbuka, notch mengecil jadi label <b>NotchNow</b> yang berkilau lembut, agar tidak menutupi tab. Arahkan kursor untuk membukanya lagi.</p></button>
-    <div class="feature static"><span class="f-ico">🚀</span><h3>Jalan otomatis & pintasan</h3><p>NotchNow langsung muncul saat Anda login ke Windows, tanpa menunggu aplikasi startup lain. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> membuka notch dari mana saja, dan <kbd>Esc</kbd> menutup notch atau mematikan alarm.</p></div>
+    <button class="feature" data-go="browser"><span class="f-ico">🪄</span><h3>Mode ringkas & jalan otomatis</h3><p>Saat browser atau jendela layar penuh terbuka, notch mengecil jadi label <b>NotchNow</b> yang berkilau lembut. NotchNow juga langsung muncul setiap Anda login ke Windows.</p></button>
   </div>
 </section>
 
@@ -206,6 +210,27 @@
   </div>
 </section>
 
+<section class="section" id="panduan">
+  <div class="guide">
+    <div class="guide-text">
+      <span class="eyebrow">Petunjuk penggunaan</span>
+      <h2>Baru pertama kali? Ada panduannya.</h2>
+      <p>Panduan bergambar 18 halaman yang menjelaskan semua fitur NotchNow langkah demi langkah dengan bahasa sehari-hari: dari memutar musik, mengatur pengingat tugas, sampai memakai peluncur dan rak file.</p>
+      <div class="cta">
+        <a class="btn btn-big" href="panduan/Panduan-NotchNow.pdf" download>
+          <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>
+          Unduh Panduan (PDF)
+        </a>
+        <a class="guide-link" href="panduan/Panduan-NotchNow.pdf" target="_blank" rel="noopener">Baca di browser →</a>
+      </div>
+      <span class="dl-meta">Panduan-NotchNow.pdf · 2 MB · Bahasa Indonesia</span>
+    </div>
+    <a class="guide-shot" href="panduan/Panduan-NotchNow.pdf" target="_blank" rel="noopener" aria-label="Buka panduan PDF">
+      <img src="panduan/preview-peluncur.jpg" alt="Contoh gambar dari panduan: tab Peluncur NotchNow" loading="lazy">
+    </a>
+  </div>
+</section>
+
 <section class="section" id="faq">
   <div class="sec-head">
     <span class="eyebrow">FAQ</span>
@@ -218,7 +243,10 @@
     <details><summary>Dari mana lirik dan sampul albumnya?</summary><p>Lirik diambil dari <b>LRCLIB</b>, database lirik terbuka, dan sampul album dari <b>iTunes</b>. Keduanya dicari otomatis berdasarkan judul dan nama penyanyi, lalu disimpan di cache. Lagu populer umumnya tersedia. Untuk lagu yang tidak ada liriknya akan muncul "Lirik tidak ditemukan", dan bila liriknya tanpa penanda waktu, lirik tampil statis.</p></details>
     <details><summary>Bagaimana mengatur transparansi dan efek kaca?</summary><p>Klik tombol <b>◐</b> di kanan atas notch. Slider <b>Latar notch</b> mengatur latar dari transparan sampai gelap, dan slider <b>Efek liquid glass</b> mengatur kekuatan efek kaca dari tipis sampai kuat. Pengaturan disimpan otomatis.</p></details>
     <details><summary>Bagaimana jadwal sholat menentukan lokasi saya?</summary><p>NotchNow memakai layanan lokasi Windows. Bila layanan itu mati, lokasi diperkirakan dari IP. Anda juga bisa memilih <b>Kota manual</b> di tab Sholat. Jadwal diambil dari layanan Aladhan dengan metode Kemenag RI sebagai bawaan.</p></details>
-    <details><summary>Apakah data saya dikirim ke mana-mana?</summary><p>Tidak. To-do, alarm, dan pengaturan disimpan hanya di komputer Anda (<code>%APPDATA%\NotchNow</code>). Yang dikirim keluar hanya koordinat lokasi, untuk mengambil jadwal sholat.</p></details>
+    <details><summary>Apakah data saya dikirim ke mana-mana?</summary><p>Tidak. To-do, catatan, riwayat clipboard, rak file, alarm, dan pengaturan disimpan hanya di komputer Anda (<code>%APPDATA%\NotchNow</code>). Yang dikirim keluar hanya koordinat lokasi untuk jadwal sholat, judul lagu untuk mencari lirik dan sampul, serta kata yang Anda cari lewat peluncur bila Anda memilih pencarian Google. Daftar hari libur diunduh dari kalender publik Google.</p></details>
+    <details><summary>Apa saja pintasan keyboard-nya?</summary><p><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> membuka atau menyematkan notch, <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Space</kbd> membuka peluncur (bila kombinasi itu sudah dipakai aplikasi lain, NotchNow memakai <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd>; pintasan yang aktif tertulis di tab Peluncur), <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Q</kbd> membuka catatan cepat, dan <kbd>Esc</kbd> menutup notch atau mematikan alarm.</p></details>
+    <details><summary>Apakah kata sandi yang saya salin ikut tercatat di riwayat clipboard?</summary><p>Tidak, bila Anda menyalinnya dari pengelola kata sandi (Bitwarden, 1Password, KeePass, dan sejenisnya), karena aplikasi itu menandai isinya sebagai rahasia. Untuk menyalin hal sensitif dari tempat lain, tekan tombol <b>Jeda</b> di tab Clipboard dulu, atau hapus itemnya setelah selesai.</p></details>
+    <details><summary>Apakah file di rak file ikut tersalin?</summary><p>Tidak. Rak hanya menyimpan alamat file, jadi tidak memakan ruang disk. Bila file aslinya dipindah atau dihapus, itemnya di rak ditandai tidak ditemukan.</p></details>
     <details><summary>Bagaimana cara mematikan auto start atau menghapus aplikasi?</summary><p>Klik kanan ikon NotchNow di system tray, lalu hilangkan centang <b>Jalankan saat Windows mulai</b>. Untuk menghapus, hilangkan dulu centang itu, pilih <b>Keluar</b>, lalu hapus folder NotchNow.</p></details>
     <details><summary>Bagaimana cara memperbarui dari versi lama?</summary><p>Klik kanan ikon NotchNow di system tray, pilih <b>Keluar</b>, hapus <code>NotchNow.exe</code> atau folder lamanya, lalu ekstrak zip terbaru dan jalankan <code>NotchNow.exe</code> dari folder baru. To-do, alarm, dan pengaturan tetap tersimpan, dan auto start ikut diperbarui.</p></details>
     <details><summary>Slider lagu berfungsi di aplikasi apa saja?</summary><p>Slider memakai kontrol media Windows, jadi bergantung pada dukungan aplikasi musiknya. Untuk <b>Apple Music</b>, NotchNow punya jalur khusus, dan jendela Apple Music harus tetap terbuka (boleh di-minimize). Bila aplikasi tidak mendukung, slider tampil redup.</p></details>

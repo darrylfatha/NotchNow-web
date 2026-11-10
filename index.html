@@ -30,7 +30,7 @@
 
 <header class="hero" id="top">
   <div class="hero-text">
-    <span class="eyebrow">Baru di v1.5: rak file, clipboard, peluncur & libur nasional ✨</span>
+    <span class="eyebrow">Baru di v1.5.1: latar berdenyut mengikuti beat lagu ✨</span>
     <h1>Notch ala MacBook,<br><span class="grad">kini di Windows.</span></h1>
     <p class="lead">Kontrol musik dengan lirik tersinkron, to-do dengan pengingat, kalender libur nasional, catatan, rak file, riwayat clipboard, peluncur cepat, timer, alarm, dan jadwal sholat. Semuanya ada di notch kecil di atas layar, tinggal arahkan kursor.</p>
     <div class="cta">
@@ -65,6 +65,7 @@
             <div class="ear left"></div><div class="ear right"></div>
             <div class="shell">
               <div class="art-bg" aria-hidden="true"></div>
+              <div class="beat-fx" id="beat-fx" aria-hidden="true"><i class="beat-dim"></i><i class="beat-glow"></i></div>
               <div class="mini">
                 <span class="mini-left"><i class="mini-art" id="mini-art"></i><span id="mini-time">--:--</span></span>
                 <span id="mini-right"></span>
@@ -73,14 +74,18 @@
               <div class="full">
                 <header class="n-head">
                   <nav class="n-tabs" id="n-tabs">
-                    <button data-tab="media">Media</button>
-                    <button data-tab="todo">To-Do</button>
-                    <button data-tab="calendar">Kalender</button>
-                    <button data-tab="timer">Timer</button>
-                    <button data-tab="alarm">Alarm</button>
-                    <button data-tab="pray">Sholat</button>
+                    <button data-tab="media" data-icon="music" title="Media"><span>Media</span></button>
+                    <button data-tab="todo" data-icon="todo" title="To-Do"><span>To-Do</span></button>
+                    <button data-tab="calendar" data-icon="calendar" title="Kalender"><span>Kalender</span></button>
+                    <button data-tab="notes" data-icon="note" title="Catatan"><span>Catatan</span></button>
+                    <button data-tab="shelf" data-icon="tray" title="Rak"><span>Rak</span></button>
+                    <button data-tab="clip" data-icon="clip" title="Clipboard"><span>Clipboard</span></button>
+                    <button data-tab="launcher" data-icon="search" title="Peluncur"><span>Peluncur</span></button>
+                    <button data-tab="timer" data-icon="timer" title="Timer"><span>Timer</span></button>
+                    <button data-tab="alarm" data-icon="alarm" title="Alarm"><span>Alarm</span></button>
+                    <button data-tab="pray" data-icon="moon" title="Sholat"><span>Sholat</span></button>
                   </nav>
-                  <span class="n-clock" id="n-clock"></span>
+                  <div class="n-right"><span id="n-date"></span><b class="n-clock" id="n-clock"></b><button class="n-ico" id="n-op" data-icon="contrast" title="Transparansi latar" aria-label="Transparansi latar"></button><button class="n-ico" id="n-pin" data-icon="pin" title="Sematkan notch" aria-label="Sematkan notch"></button></div>
                 </header>
                 <main class="n-main">
                   <!-- media -->
@@ -112,7 +117,7 @@
                   </section>
                   <!-- todo -->
                   <section data-tab="todo">
-                    <form class="n-row" id="todo-form"><input id="todo-input" placeholder="Tambah tugas baru…" maxlength="80" autocomplete="off"><button class="n-primary">Tambah</button></form>
+                    <form class="n-row" id="todo-form"><input id="todo-input" placeholder="Tambah tugas baru…" maxlength="80" autocomplete="off"><input type="time" id="todo-time" aria-label="Jam pengingat"><select id="todo-prio" aria-label="Prioritas"><option value="2">Tinggi</option><option value="1" selected>Normal</option><option value="0">Rendah</option></select><button class="n-primary">Tambah</button></form>
                     <ul class="n-list" id="todo-list"></ul>
                   </section>
                   <!-- calendar -->
@@ -125,9 +130,34 @@
                       <div class="c-side">
                         <b id="c-date"></b>
                         <span id="c-hijri"></span>
-                        <p>Titik oranye menandai tanggal yang punya tugas. Tanggal Hijriah tampil kecil di bawah tiap tanggal.</p>
+                        <div id="c-hol"></div>
+                        <div class="hol-cd"><span>Libur berikutnya</span><b id="hol-name">—</b><small id="hol-date"></small><em id="hol-left"></em></div>
+                        <p class="c-legend"><i class="lg-l"></i>Libur nasional <i class="lg-c"></i>Cuti bersama <i class="lg-t"></i>Ada tugas</p>
                       </div>
                     </div>
+                  </section>
+                  <!-- catatan -->
+                  <section data-tab="notes">
+                    <div class="nt-wrap">
+                      <div class="nt-side"><button class="n-btn" id="nt-new">+ Catatan baru</button><ul id="nt-list"></ul></div>
+                      <textarea id="nt-text" placeholder="Tulis apa saja… tersimpan otomatis" aria-label="Isi catatan"></textarea>
+                    </div>
+                  </section>
+                  <!-- rak file -->
+                  <section data-tab="shelf">
+                    <div class="sh-drop" id="sh-drop"><span>📂 Seret file dari komputer Anda ke sini</span><small>Di aplikasi aslinya, file bisa diseret keluar lagi ke email, chat, atau folder lain.</small></div>
+                    <ul class="sh-list" id="sh-list"></ul>
+                  </section>
+                  <!-- clipboard -->
+                  <section data-tab="clip">
+                    <div class="n-row"><input id="cl-search" placeholder="Cari riwayat… (coba salin teks apa pun di halaman ini)" autocomplete="off"><button class="n-btn" id="cl-pause">Jeda</button></div>
+                    <ul class="n-list cl-list" id="cl-list"></ul>
+                  </section>
+                  <!-- peluncur -->
+                  <section data-tab="launcher">
+                    <div class="lx-box"><span class="lx-ico" data-icon="search"></span><input id="lx-input" placeholder="Cari aplikasi, hitung 12*8, 5 km ke mil, atau cari di Google…" autocomplete="off"></div>
+                    <ul class="lx-list" id="lx-list"></ul>
+                    <p class="lx-hint">↑ ↓ pilih · Enter buka · di aplikasi: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Space</kbd></p>
                   </section>
                   <!-- timer -->
                   <section data-tab="timer">
@@ -178,13 +208,13 @@
   <div class="features">
     <button class="feature" data-go="media"><span class="f-ico">🎵</span><h3>Kontrol media</h3><p>Lagu, artis, dan sampul album dari Spotify, YouTube Music, Apple Music, dan lainnya. Bila aplikasi tidak mengirim sampul, NotchNow mencarikan sampul album resminya. Ada tombol putar/jeda, stop, sebelumnya, berikutnya, slider untuk memajukan atau memundurkan lagu, serta pengatur volume.</p></button>
     <button class="feature" data-go="lyrics"><span class="f-ico">🎤</span><h3>Lirik tersinkron</h3><p>Lirik bergulir mengikuti lagu, dengan baris yang sedang dinyanyikan disorot. Saat notch tertutup, baris lirik tampil di tengah notch seperti Dynamic Island.</p></button>
-    <button class="feature" data-go="media"><span class="f-ico">🎨</span><h3>Tema sampul & liquid glass</h3><p>Latar notch berubah mengikuti warna sampul album yang sedang diputar. Bar tab dan volume bergaya kaca cair iOS, dan transparansi latar maupun kekuatan efek kacanya bisa diatur.</p></button>
+    <button class="feature" data-go="media"><span class="f-ico">🎨</span><h3>Tema sampul & latar beat <span class="new">Baru</span></h3><p>Latar notch berubah mengikuti warna sampul album dan berdenyut gelap-terang mengikuti beat lagu. Bar tab dan volume bergaya kaca cair iOS, dengan kilau yang muncul saat kursor lewat.</p></button>
     <button class="feature" data-go="todo"><span class="f-ico">✅</span><h3>To-do lengkap <span class="new">Baru</span></h3><p>Tugas dengan tanggal, jam pengingat, prioritas, dan pengulangan harian, mingguan, atau bulanan. Pengingat bisa ditunda 10 menit atau langsung ditandai selesai.</p></button>
     <button class="feature" data-go="calendar"><span class="f-ico">📅</span><h3>Libur nasional & cuti bersama <span class="new">Baru</span></h3><p>Kalender bulanan dengan tanggal Hijriah, libur nasional merah dan cuti bersama oranye, plus hitung mundur ke hari libur berikutnya.</p></button>
-    <div class="feature static"><span class="f-ico">📝</span><h3>Catatan cepat <span class="new">Baru</span></h3><p>Tulis ide atau nomor penting dalam sekejap. Catatan tersimpan otomatis dan bisa disalin. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Q</kbd> langsung membukanya.</p></div>
-    <div class="feature static"><span class="f-ico">📂</span><h3>Rak file <span class="new">Baru</span></h3><p>Seret file ke notch untuk disimpan sementara, pindah ke jendela lain, lalu seret keluar ke email, chat, atau folder tujuan.</p></div>
-    <div class="feature static"><span class="f-ico">📋</span><h3>Riwayat clipboard <span class="new">Baru</span></h3><p>50 teks dan 8 gambar terakhir yang Anda salin. Klik untuk menyalin ulang, sematkan yang sering dipakai, atau jeda pencatatan.</p></div>
-    <div class="feature static"><span class="f-ico">🔎</span><h3>Peluncur cepat <span class="new">Baru</span></h3><p>Buka aplikasi, hitung, konversi satuan, atau cari di Google dari satu kotak. Tekan <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Space</kbd> dari mana saja.</p></div>
+    <button class="feature" data-go="notes"><span class="f-ico">📝</span><h3>Catatan cepat <span class="new">Baru</span></h3><p>Tulis ide atau nomor penting dalam sekejap. Catatan tersimpan otomatis dan bisa disalin. <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Q</kbd> langsung membukanya.</p></button>
+    <button class="feature" data-go="shelf"><span class="f-ico">📂</span><h3>Rak file <span class="new">Baru</span></h3><p>Seret file ke notch untuk disimpan sementara, pindah ke jendela lain, lalu seret keluar ke email, chat, atau folder tujuan.</p></button>
+    <button class="feature" data-go="clip"><span class="f-ico">📋</span><h3>Riwayat clipboard <span class="new">Baru</span></h3><p>50 teks dan 8 gambar terakhir yang Anda salin. Klik untuk menyalin ulang, sematkan yang sering dipakai, atau jeda pencatatan.</p></button>
+    <button class="feature" data-go="launcher"><span class="f-ico">🔎</span><h3>Peluncur cepat <span class="new">Baru</span></h3><p>Buka aplikasi, hitung, konversi satuan, atau cari di Google dari satu kotak. Tekan <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Space</kbd> dari mana saja.</p></button>
     <button class="feature" data-go="timer"><span class="f-ico">⏱️</span><h3>Timer & alarm</h3><p>Timer 1–60 menit atau atur sendiri, dan alarm sekali atau setiap hari. Saat waktunya tiba, notch membuka sendiri dan berbunyi; alarm bisa ditunda 5 menit.</p></button>
     <button class="feature" data-go="pray"><span class="f-ico">🕌</span><h3>Jadwal sholat</h3><p>Imsak sampai Isya sesuai lokasi Anda, hitung mundur ke sholat berikutnya, dan pengingat adzan. Metode Kemenag RI, MUIS, JAKIM, dan lainnya.</p></button>
     <button class="feature" data-go="browser"><span class="f-ico">🪄</span><h3>Mode ringkas & jalan otomatis</h3><p>Saat browser atau jendela layar penuh terbuka, notch mengecil jadi label <b>NotchNow</b> yang berkilau lembut. NotchNow juga langsung muncul setiap Anda login ke Windows.</p></button>

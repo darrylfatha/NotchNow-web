@@ -561,7 +561,7 @@ $$('.n-tabs, .m-vol').forEach((el) => {
   el.addEventListener('pointerleave', () => el.classList.remove('glow'));
 });
 
-// ================= v1.5.1: latar berdenyut mengikuti beat (simulasi) =================
+// ================= v1.5.1: latar mendat-mendut mengikuti beat (simulasi) =================
 // Di aplikasi aslinya, level suara dibaca dari Windows. Di demo ini beatnya dibuat dari tempo lagu contoh.
 const BPM = [104, 92, 118];
 const beatFx = $('#beat-fx');

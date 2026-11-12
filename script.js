@@ -677,6 +677,7 @@ renderShelf();
 // ================= v1.5: riwayat clipboard =================
 let clips = [
   { id: 1, text: 'https://darrylfatha.github.io/NotchNow-web/', pin: true, ago: '2 mnt' },
+  { id: 5, img: 'linear-gradient(135deg,#ff7a59,#b33cff 55%,#3a4bff)', label: 'Screenshot', w: 1920, h: 1080, size: '812 KB', pin: false, ago: '4 mnt' },
   { id: 2, text: 'Rapat diundur ke Kamis pukul 14.00', pin: false, ago: '8 mnt' },
   { id: 3, text: 'Jl. Merdeka No. 17, Bandung', pin: false, ago: '25 mnt' },
   { id: 4, text: 'npm run dist', pin: false, ago: '1 jam' },
@@ -684,8 +685,8 @@ let clips = [
 let clipPaused = false;
 function renderClips() {
   const q = $('#cl-search').value.trim().toLowerCase();
-  const list = clips.filter((c) => !q || c.text.toLowerCase().includes(q)).sort((a, b) => b.pin - a.pin);
-  $('#cl-list').innerHTML = list.length ? list.map((c) => `<li data-id="${c.id}"><button class="cl-pin ${c.pin ? 'on' : ''}" data-act="pin" aria-label="Sematkan">★</button><span class="txt" data-act="copy" title="Klik untuk menyalin">${esc(c.text)}</span><small>${c.ago}</small><button class="del" data-act="del" aria-label="Hapus">✕</button></li>`).join('') : '<li class="empty">Tidak ada yang cocok.</li>';
+  const list = clips.filter((c) => !q || (c.text && c.text.toLowerCase().includes(q))).sort((a, b) => b.pin - a.pin);
+  $('#cl-list').innerHTML = list.length ? list.map((c) => `<li data-id="${c.id}"><button class="cl-pin ${c.pin ? 'on' : ''}" data-act="pin" aria-label="Sematkan">★</button>${c.text != null ? `<span class="txt" data-act="copy" title="Klik untuk menyalin">${esc(c.text)}</span>` : `<span class="cl-img" data-act="copy" title="Klik untuk menyalin gambar">${c.url ? `<img src="${c.url}" alt="">` : `<i style="background:${c.img}">${esc(c.label || '')}</i>`}<em>Gambar ${c.w}×${c.h} · ${c.size}</em></span>`}<small>${c.ago}</small><button class="del" data-act="del" aria-label="Hapus">✕</button></li>`).join('') : '<li class="empty">Tidak ada yang cocok.</li>';
 }
 $('#cl-list').addEventListener('click', async (e) => {
   const b = e.target.closest('[data-act]');
@@ -696,7 +697,11 @@ $('#cl-list').addEventListener('click', async (e) => {
   if (b.dataset.act === 'pin') c.pin = !c.pin;
   if (b.dataset.act === 'del') clips = clips.filter((x) => x.id !== id);
   if (b.dataset.act === 'copy') {
-    try { await navigator.clipboard.writeText(c.text); } catch { /* izin clipboard ditolak */ }
+    try {
+      if (c.text != null) await navigator.clipboard.writeText(c.text);
+      else if (c.blob) await navigator.clipboard.write([new ClipboardItem({ [c.blob.type]: c.blob })]);
+    } catch { /* izin clipboard ditolak */ }
+    if (c.text == null) { b.querySelector('em').textContent = '✓ Disalin dalam ukuran asli'; setTimeout(renderClips, 1200); return; }
     b.textContent = '✓ Disalin';
     setTimeout(renderClips, 900);
     return;
@@ -719,6 +724,22 @@ document.addEventListener('copy', () => {
   renderClips();
 });
 renderClips();
+// Tempel (Ctrl+V) screenshot di halaman ini: gambarnya masuk ke riwayat demo, seperti di aplikasi.
+document.addEventListener('paste', (e) => {
+  if (clipPaused) return;
+  const file = Array.from(e.clipboardData ? e.clipboardData.files : []).find((f) => f.type.startsWith('image/'));
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const im = new Image();
+  im.onload = () => {
+    clips.unshift({ id: Date.now(), url, blob: file, w: im.naturalWidth, h: im.naturalHeight, size: fmtSize(file.size), pin: false, ago: 'baru' });
+    renderClips();
+    if (!open) setOpen(true);
+    showTab('clip');
+    holdUntil = Date.now() + 5000;
+  };
+  im.src = url;
+});
 
 // ================= v1.5: peluncur =================
 const APPS = [['Microsoft Word', '📘'], ['Microsoft Excel', '📗'], ['PowerPoint', '📙'], ['Spotify', '🎧'], ['Google Chrome', '🌐'], ['Kalkulator', '🧮'],

@@ -480,3 +480,10 @@ button.feature:hover h3::after { opacity: 1; }
 .lx-t small { font-size: 10px; color: rgba(255, 255, 255, .55); font-weight: 400; }
 .lx-hint { font-size: 10px; color: #8e8e93; }
 .lx-hint kbd { font-size: 9px; }
+
+/* ---------- v1.5.2: gambar di demo clipboard ---------- */
+.cl-img { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.cl-img i, .cl-img img { width: 96px; height: 54px; border-radius: 7px; flex-shrink: 0; object-fit: cover; box-shadow: 0 2px 8px rgba(0, 0, 0, .35); }
+.cl-img i { display: grid; place-items: center; font-style: normal; font-size: 10.5px; font-weight: 700; color: #fff; }
+.cl-img em { font-style: normal; font-size: 11px; color: rgba(255, 255, 255, .65); }
+.cl-list li { align-items: center; }
